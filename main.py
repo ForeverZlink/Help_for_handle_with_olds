@@ -1,4 +1,4 @@
-from modulo import separa_idosos
+from modulo import separa_idosos, fila_prioridade_por_idosos
 
 
 pessoas_cadastradas = {
@@ -16,9 +16,14 @@ while True:
         break
 
 
-pessoas_separadas = separa_idosos(pessoas_cadastradas)
+pessoas_separadas = separa_idosos(pessoas_cadastradas,60)
 
-print(pessoas_separadas)
+fila_ordenada= fila_prioridade_por_idosos(pessoas_separadas,2)
+
+
+
+
+print(fila_ordenada)
 
 
 
