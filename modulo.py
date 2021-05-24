@@ -1,3 +1,36 @@
+class InterfacePrograma():
+    
+    @staticmethod
+    def menu():
+        pessoas_cadastradas = {
+             'nome':[],'idade':[]
+            }
+
+        while True:
+            name = str(input('Digite o nome:')).strip()
+            age  = int(input('Agora a idade:'))
+            opcao = leia_opcao('Sua escolha é:')
+            pessoas_cadastradas['nome'].append(name)
+            pessoas_cadastradas['idade'].append(age)
+            if opcao == 'N':
+                return pessoas_cadastradas
+    
+    def leia_opcao(text):
+        while True:
+            print('-='*34)
+            print('Suas opções:')
+            print('0-Encerrar Programa')
+            print('1-Continuar')
+            opcao = str(input(text)).strip().upper()
+            if opcao not in 'SN':
+                print('Opção ERRADA! DIGITE APENAS 1 OU 0 ')
+            else:
+                break
+
+
+
+
+
 class Pessoa():
 
     def __init__(self,pessoas_cadastradas:dict):

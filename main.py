@@ -1,20 +1,8 @@
-from modulo import Pessoa
-
-            
+from modulo import Pessoa,InterfacePrograma
+     
           
-pessoas_cadastradas = {
- 'nome':[],'idade':[]
-}
-
-while True:
-    name = str(input('Digite o nome:')).strip()
-    age  = int(input('Agora a idade:'))
-    opcao = str(input('Quer continuar?S/N')).strip().upper()
-    pessoas_cadastradas['nome'].append(name)
-    pessoas_cadastradas['idade'].append(age)
-    if opcao == 'N':
-        break
-
+pessoas_cadastradas=InterfacePrograma.menu()
+        
 pessoas=Pessoa(pessoas_cadastradas)
 
 pessoas.separa_idosos(60)
