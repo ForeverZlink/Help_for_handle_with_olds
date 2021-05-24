@@ -21,11 +21,10 @@ class Pessoa():
             else:
                 pessoas_separadas['menores_60'].append([nome,idade])
 
-         
+        self.pessoas_separadas = pessoas_separadas
         return pessoas_separadas
 
-
-    def fila_prioridade_por_idosos(self,pessoas_separadas, condição_de_ordenação_fila:int)->list:
+    def fila_prioridade_por_idosos(self, condição_de_ordenação_fila:int,**pessoas_separadas,)->list:
         """
         gera uma fila de prioridade a partir da idade 
         Parametro pessoas: é as pessoas que serão ordenadas em fila
@@ -38,8 +37,8 @@ class Pessoa():
         #pois se isso nao for feito, uma ligação entre lista é criada no programa principal e o 
         #a variavel do programa principal fica ligada as listas dessas função
         pessoas_separadas = {
-            'maiores_60':pessoas_separadas['maiores_60'].copy(),
-            'menores_60':pessoas_separadas['menores_60'].copy()
+            'maiores_60':self.pessoas_separadas['maiores_60'].copy(),
+            'menores_60':self.pessoas_separadas['menores_60'].copy()
             }
 
         fila_prioridade=[]
@@ -69,25 +68,24 @@ class Pessoa():
                 #apago o primeiro valor da lista
                 pessoas_separadas['maiores_60'].pop(0)
             contador+=1
-
+        self.fila_prioridade = fila_prioridade[:]
         return fila_prioridade
         
 
-    def mostra_tabela_idosos_e_nao_idosos(self,pessoas):
+    def mostra_tabela_idosos_e_nao_idosos(self,pessoas_separadas=dict):
         """
         Mostra uma tabela com idosos e nao idosos.
         Só será mostrado as lista que possuir valores
         
         """
         #varre  o dicionario 
-        for nome_categoria, value in pessoas.items():
+        for nome_categoria, value in self.pessoas_separadas.items():
             ##caso a lista esteja vazia, o programa vai para a próxima iteração
             if value == []:
                 continue
             print('-+'*50)
             print(f'{nome_categoria:^30}'.upper())
             print(f'{"Nome":<40} {"idade"}')
-
 
             ##varre a lista 
             for pessoa in value:
