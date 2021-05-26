@@ -1,5 +1,19 @@
 class InterfacePrograma():
     
+    
+    def leia_opcao(text):
+        while True:
+            print('-='*34)
+            print('Suas opções:')
+            print('0-Encerrar Programa')
+            print('1-Continuar')
+            opcao = str(input(text)).strip().upper()
+            if opcao =='1' or opcao =='0':
+                return opcao
+                
+            else:
+                print('Opção ERRADA! DIGITE APENAS 1 OU 0 ')
+
     @staticmethod
     def menu():
         pessoas_cadastradas = {
@@ -9,25 +23,12 @@ class InterfacePrograma():
         while True:
             name = str(input('Digite o nome:')).strip()
             age  = int(input('Agora a idade:'))
-            opcao = leia_opcao('Sua escolha é:')
+            opcao =InterfacePrograma.leia_opcao('Sua escolha é:')
             pessoas_cadastradas['nome'].append(name)
             pessoas_cadastradas['idade'].append(age)
-            if opcao == 'N':
+            if opcao == '0':
                 return pessoas_cadastradas
     
-    def leia_opcao(text):
-        while True:
-            print('-='*34)
-            print('Suas opções:')
-            print('0-Encerrar Programa')
-            print('1-Continuar')
-            opcao = str(input(text)).strip().upper()
-            if opcao not in 'SN':
-                print('Opção ERRADA! DIGITE APENAS 1 OU 0 ')
-            else:
-                break
-
-
 
 
 
@@ -35,29 +36,35 @@ class Pessoa():
 
     def __init__(self,pessoas_cadastradas:dict):
         self.pessoas=pessoas_cadastradas
+    
 
-    def separa_idosos(self,idade_para_ser_idoso:int)->dict:
-        """
-        Separa os idosos em uma lista que está dentro de um dicionário.
-        Parametro idade_para_ser_idoso : é com quantos anos alguém é idoso.
         
-        """
-        pessoas_separadas = {
-            'maiores_60':[],'menores_60':[]
-        }
-
-        #varre o dicionario
-        for nome, idade in zip(self.pessoas['nome'],self.pessoas['idade']):
+    
+    def separa_idosos(function)->dict:
+        def with_parameters(self,condição_de_ordenação_fila,idade_para_ser_idoso):
+            """
+            Separa os idosos em uma lista que está dentro de um dicionário.
+            Parametro idade_para_ser_idoso : é com quantos anos alguém é idoso.
             
-            if idade>=idade_para_ser_idoso:
-                pessoas_separadas['maiores_60'].append([nome,idade])
-            else:
-                pessoas_separadas['menores_60'].append([nome,idade])
-
-        self.pessoas_separadas = pessoas_separadas
-        return pessoas_separadas
-
-    def fila_prioridade_por_idosos(self, condição_de_ordenação_fila:int,**pessoas_separadas,)->list:
+            """
+        
+            pessoas_separadas = {
+                'maiores_60':[],'menores_60':[]
+            }
+            #varre o dicionario
+            for nome, idade in zip(self.pessoas['nome'],self.pessoas['idade']):
+                
+                if idade>=idade_para_ser_idoso:
+                    pessoas_separadas['maiores_60'].append([nome,idade])
+                else:
+                    pessoas_separadas['menores_60'].append([nome,idade])
+            self.pessoas_separadas = pessoas_separadas.copy()
+            fila_ordenada=function(self.pessoas_separadas,condição_de_ordenação_fila)
+            return fila_ordenada
+        return with_parameters
+        
+    @separa_idosos
+    def fila_prioridade_por_idosos(pessoas_separadas,condição_de_ordenação_fila)->list:
         """
         gera uma fila de prioridade a partir da idade 
         Parametro pessoas: é as pessoas que serão ordenadas em fila
@@ -70,8 +77,8 @@ class Pessoa():
         #pois se isso nao for feito, uma ligação entre lista é criada no programa principal e o 
         #a variavel do programa principal fica ligada as listas dessas função
         pessoas_separadas = {
-            'maiores_60':self.pessoas_separadas['maiores_60'].copy(),
-            'menores_60':self.pessoas_separadas['menores_60'].copy()
+            'maiores_60':pessoas_separadas['maiores_60'].copy(),
+            'menores_60':pessoas_separadas['menores_60'].copy()
             }
 
         fila_prioridade=[]
@@ -101,9 +108,8 @@ class Pessoa():
                 #apago o primeiro valor da lista
                 pessoas_separadas['maiores_60'].pop(0)
             contador+=1
-        self.fila_prioridade = fila_prioridade[:]
-        return fila_prioridade
-        
+        fila = fila_prioridade[:]
+        return fila
 
     def mostra_tabela_idosos_e_nao_idosos(self,pessoas_separadas=dict):
         """
