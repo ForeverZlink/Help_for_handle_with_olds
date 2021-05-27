@@ -130,3 +130,9 @@ class Pessoa():
             for pessoa in value:
                 print(f'{pessoa[0]:<42}{pessoa[1]}')
             print('-+'*50)
+
+    def cria_um_txt_com_as_pessoas_separadas(self):
+        with open('pessoas.txt','a+') as arquivo:
+            for value in self.pessoas_separadas.values():
+                for pessoa in value:
+                    arquivo.write(f'{pessoa[0]:<49}{pessoa[1]:}\n')

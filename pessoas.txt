@@ -1,0 +1,4 @@
+maiores_60  carlos                                           99
+menores_60  maiores_60  carlos                                           99
+zelda                                            993
+menores_60  cunha                                            32
