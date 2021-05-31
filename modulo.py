@@ -136,3 +136,10 @@ class Pessoa():
             for value in self.pessoas_separadas.values():
                 for pessoa in value:
                     arquivo.write(f'{pessoa[0]:<49}{pessoa[1]:}\n')
+
+    def cria_um_json(self,modo):
+        from json import dumps
+        pessoas_separadas_json= dumps(self.pessoas_separadas)
+        with open('pessoas.json',modo) as archiver:
+            archiver.seek(0,0)
+            archiver.write(pessoas_separadas_json)
