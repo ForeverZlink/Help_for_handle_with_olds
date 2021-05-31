@@ -1,14 +1,17 @@
 class InterfacePrograma():
     
     
+
+
     def leia_opcao(text):
         while True:
             print('-='*34)
             print('Suas opções:')
             print('0-Encerrar Programa')
             print('1-Continuar')
+            print('2-Criar_json')
             opcao = str(input(text)).strip().upper()
-            if opcao =='1' or opcao =='0':
+            if opcao =='1' or opcao =='0' or opcao == "2":
                 return opcao
                 
             else:
@@ -24,10 +27,12 @@ class InterfacePrograma():
             name = str(input('Digite o nome:')).strip()
             age  = int(input('Agora a idade:'))
             opcao =InterfacePrograma.leia_opcao('Sua escolha é:')
+            
             pessoas_cadastradas['nome'].append(name)
             pessoas_cadastradas['idade'].append(age)
-            if opcao == '0':
-                return pessoas_cadastradas
+            if opcao == '0' or opcao =='2':
+                
+                return pessoas_cadastradas,opcao
     
 
 
