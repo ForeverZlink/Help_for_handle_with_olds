@@ -138,8 +138,16 @@ class Pessoa():
                     arquivo.write(f'{pessoa[0]:<49}{pessoa[1]:}\n')
 
     def cria_um_json(self,modo):
+        '''
+        Parametro modo: é como o arquivo vai ser aberto. Usar os parametros da função open do python
+        '''
         from json import dumps
+        #cria um json
         pessoas_separadas_json= dumps(self.pessoas_separadas)
-        with open('pessoas.json',modo) as archiver:
+
+        #se o modo for x, só vai criar um arquivo se ele não existir
+        #se o modo for w, ele sempre vai criar um novo arquivo que vai substituir o antigo
+        with open('./arquivos_pessoas/pessoas.json',modo) as archiver:
+            #vai para o inicio do arquivo
             archiver.seek(0,0)
             archiver.write(pessoas_separadas_json)
