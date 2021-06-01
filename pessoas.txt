@@ -1,0 +1,6 @@
+gd                                               0
+hg                                               0
+gdg                                              0
+faf                                              12
+carlos                                           93
+92                                               9

@@ -1,26 +1,18 @@
-from modulo import separa_idosos, fila_prioridade_por_idosos, mostra_tabela_idosos
+from modulo import Pessoa,InterfacePrograma
+     
+          
+pessoas_cadastradas,opção=InterfacePrograma.menu()
+        
+pessoas=Pessoa(pessoas_cadastradas)
 
+fila_ordenada = pessoas.fila_prioridade_por_idosos(2,60)
 
-pessoas_cadastradas = {
-    'nome':[],'idade':[]
-    }
+pessoas.mostra_tabela_idosos_e_nao_idosos()
+pessoas.cria_um_txt_com_as_pessoas_separadas()
+if opção == '2':
+    pessoas.cria_um_json('+w')
 
-
-while True:
-    name = str(input('Digite o nome:')).strip()
-    age  = int(input('Agora a idade:'))
-    opcao = str(input('Quer continuar?S/N')).strip().upper()
-    pessoas_cadastradas['nome'].append(name)
-    pessoas_cadastradas['idade'].append(age)
-    if opcao == 'N':
-        break
-
-
-pessoas_separadas = separa_idosos(pessoas_cadastradas,60)
-
-fila_ordenada= fila_prioridade_por_idosos(pessoas_separadas,2)
-
-mostra_tabela_idosos(pessoas_separadas)
+print(f'A fila de prioridade é {fila_ordenada}')
 
 
 
